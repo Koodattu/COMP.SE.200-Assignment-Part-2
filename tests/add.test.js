@@ -1,4 +1,4 @@
-import add from '../src/add';
+const add = require('../src/add')
 
 describe('add', () => {
   test('should add two positive numbers', () => {
