@@ -130,4 +130,28 @@ describe("isEmpty", () => {
     obj[sym] = "value";
     expect(isEmpty(obj)).toBe(false); // Object has a symbol property
   });
+  
+    // Test with prototype object
+  test("should return true for an empty prototype object", () => {
+    function MyConstructor() {}
+    const prototype = MyConstructor.prototype;
+    expect(isEmpty(prototype)).toBe(true);
+  });
+
+  test("should return false for a non-empty prototype object", () => {
+    function MyConstructor() {}
+    MyConstructor.prototype.someProperty = 1;
+    const prototype = MyConstructor.prototype;
+    expect(isEmpty(prototype)).toBe(false);
+  });
+
+  test("should return true for Object.prototype when empty", () => {
+    expect(isEmpty(Object.prototype)).toBe(true);
+  });
+
+  test("should return false for Object.prototype with own properties", () => {
+    Object.prototype.newProp = 'value';
+    expect(isEmpty(Object.prototype)).toBe(false);
+    delete Object.prototype.newProp; // Clean up
+  });
 });
